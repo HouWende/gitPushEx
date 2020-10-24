@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .red{color:red;}
+        .orange{color:orange;}
+        .blue{color:blue;}
+        .green{color:green;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2 style="text-align:center;">{{content}}</h2>
+    <ul @click="Congratulation">
+        <li>姓名 分数 等级</li>
+        <li v-for="item in arr" :key="item">
+            <span>{{item.name}}</span>
+            <span>{{item.score}}</span>
+            <span v-if="item.score<60"><a @click.stop="tip" style="cursor: pointer; color:red;">{{level(item.score)}}</a></span>
+            <span v-else :style="isColor">{{level(item.score)}}</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+<script>
+    const vue = new Vue({
+        el: "#app",
+        data:{
+            content:"前端练习标题",
+            arr:[
+                {name:"张珊",score:99},
+                {name:"李思",score:85},
+                {name:"王武",score:73},
+                {name:"赵柳",score:60},
+                {name:"齐琪",score:59}
+            ],
+            isColor: {color: 'green'}
+
+        },
+        computed:{
+
+        },
+        methods:{
+            level(score){
+                switch(parseInt(score/10)) {
+                    case 10:
+                    case 9: return '优秀'; break;
+                    case 8: return "良好"; break;
+                    case 7: return "不错"; break;
+                    case 6: return "及格"; break;
+                    default: return "努力";
+                }
+            },
+            styleF(score){
+                switch(parseInt(score/10)) {
+                    case 10:
+                    case 9: return ; break;
+                    case 8: return "良好"; break;
+                    case 7: return "不错"; break;
+                    case 6: return "及格"; break;
+                    default: return "努力";
+                }
+            },
+            Congratulation(){
+                alert("恭喜毕业！");
+            },
+            tip(){
+                alert("补考！！！");
+            }
+        }
+    })
+</script>
+</html>
